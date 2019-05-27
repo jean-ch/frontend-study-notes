@@ -2,17 +2,15 @@
 - 对es6了解多少 
 - 箭头函数与正常函数有哪些区别 
 - class的实现 用原型写一个继承 
-- ajax axios fetch的区别 
-- 如何用promise封装一个ajax 
 - ES6常用到哪些，对class的理解，手写一个对继承的实现 
-- Promise是否了解，如何实现一个promise 
 - class继承中子类想使用父类的方法，应该用什么方式调用(super的意义) 
 - 浏览器的架构，bom，dom 
 - 对浏览器渲染机制的理解（具体到细节，从渲染树到paint之间究竟发生了什么） 
 - 闭包、作用域的理解 
 - 用原生xhr发送一个请求 
+- ajax axios fetch的区别 
 - axios与xhr的区别，如何用promise包装xhr 
-- 实现一个sendRequest，有最大请求并发限制 
+- 实现一个sendRequest，有最大请求并发限制 (https://segmentfault.com/a/1190000017052903)(https://juejin.im/post/5c889a2b5188257edb45e603)  
 - EventLoop的理解 
 - eventloop的先后顺序(node内) 
 - 浏览器渲染触发在EventLoop的哪个阶段，触发机制是怎么样的 

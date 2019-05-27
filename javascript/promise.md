@@ -94,3 +94,4 @@ Promise.race([p1, p2]).then(function(result) {
 
 https://javascript.ruanyifeng.com/advanced/promise.html
 http://es6.ruanyifeng.com/#docs/promise
+https://developers.google.com/web/fundamentals/primers/promises
