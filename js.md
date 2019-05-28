@@ -11,9 +11,6 @@
 - ajax axios fetch的区别 
 - axios与xhr的区别，如何用promise包装xhr 
 - 实现一个sendRequest，有最大请求并发限制 (https://segmentfault.com/a/1190000017052903)(https://juejin.im/post/5c889a2b5188257edb45e603)  
-- EventLoop的理解 
-- eventloop的先后顺序(node内) 
-- 浏览器渲染触发在EventLoop的哪个阶段，触发机制是怎么样的 
 - ES module与cjs的区别 
 - Tree shaking的实现原理 
 - node中的垃圾收集机制 

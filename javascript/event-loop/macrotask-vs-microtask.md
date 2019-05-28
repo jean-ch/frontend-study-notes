@@ -1,0 +1,11 @@
+#### macro tasks, micro tasks  
+- macro task: 一个event loop有一个或多个task队列，不同task source来的任务可能放到不同的task队列中  
+	- setTimeout
+	- setImmediate 
+	- dom操作events 
+	- 用户交互events： mouse events, click events 
+	- XHR callbacks, network events   
+- micro task: 每个event loop有一个micro task队列 
+	- promise.then
+	- process.nextTick
+	- object observer callbacks  
