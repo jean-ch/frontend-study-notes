@@ -20,11 +20,32 @@ console.log(2);
 ``` 
 setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在"任务队列"的尾部添加一个事件，因此要等到同步任务和"任务队列"现有的事件都处理完，才会得到执行   
 
-##### process.nextTick 
+##### process.nextTick(node)  
 在当前"执行栈"的尾部----下一次Event Loop（主线程读取"任务队列"）之前----触发回调函数。也就是说，它指定的任务总是发生在所有异步任务之前  
 
-##### setImmediate  
+##### setImmediate(node)  
 当前"任务队列"的尾部添加事件，也就是说，它指定的任务总是在下一次Event Loop时执行，这与setTimeout(fn, 0)很像  
 需要多次event loop才能执行完
 setTimeOut(fn,0)和setImmediate都是放在当前任务队列的尾部，哪个先执行呢？答案是不确定 
-[代码示例](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
+[代码示例](http://www.ruanyifeng.com/blog/2014/10/event-loop.html) 
+
+##### promise和event loop  
+```
+console.log('script start');
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+Promise.resolve().then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+console.log('script end');
+/***
+script start
+script end
+promise1 // promise先放入任务队列
+promise2
+setTimeout // setTimeout在当前任务队列的尾端执行
+***/
+```
