@@ -29,7 +29,9 @@ setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空�
 setTimeOut(fn,0)和setImmediate都是放在当前任务队列的尾部，哪个先执行呢？答案是不确定 
 [代码示例](http://www.ruanyifeng.com/blog/2014/10/event-loop.html) 
 
-##### promise和event loop  
+##### promise和setTimeout执行的先后顺序 
+每个浏览器的实现都不同
+chrome： 
 ```
 console.log('script start');
 setTimeout(function() {
@@ -49,3 +51,8 @@ promise2
 setTimeout // setTimeout在当前任务队列的尾端执行
 ***/
 ```
+
+### Javascript concurrency model
+- heap： 分配variable 内存  
+- stack： 函数调用
+- queue(queue-lick): event loop     
