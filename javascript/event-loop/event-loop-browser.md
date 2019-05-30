@@ -30,5 +30,8 @@ console.log('E') // 步骤5：**输出 E**
 
 #### micro task的执行时机  
 把task栈中的第一个task拉到执行栈中执行完后就会进行micro task checkpoint
-micro task的执行时机是见缝插针，尽可能早。只要javascript的执行栈为空，就执行micro task。因此一个event loop可以执行多次micro task 
+micro task的执行时机是见缝插针，尽可能早。只要javascript的执行栈为空，就执行micro task。因此一个event loop可以执行多次micro task  
+
+##### Promise.resolve()
+放在micro task的尾部，因此在本轮event loop结束时执行  
 

@@ -17,7 +17,7 @@ asynchronous: 不进入主线程、而进入"任务队列"（task queue）的任
 - 主线程不断重复上面的第三步    
 
 #### setTimeOut(fn,0)
-task queue尾部 
+task queue尾部，在下一轮event loop开始时执行   
 ```
 setTimeout(function(){console.log(1);}, 0);
 console.log(2);
