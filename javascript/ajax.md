@@ -1,6 +1,6 @@
 ### AJAX的原生写法  
+1. create XMLHttpRequest object  
 ```
-// 1. create XMLHttpRequest object
 var request;
 if (window.XMLHttpRequest) {
 	request = new XMLHttpRequest(); // for IE7+, Firefox, Chrome, Opera, Safari
@@ -8,11 +8,15 @@ if (window.XMLHttpRequest) {
 else {
 	request = new ActiveXObject("Microsoft.XMLHTTP");
 }
+```  
 
-// 2. register callback function
+2. register callback function   
+```
 request.onreadystatechange = callback;
+```  
 
-// 3. send request
+3. send request   
+```
 // Get
 request.open("GET, "url", true); // open的第三个参数指定是否要使用异步，default是true 
 request.send();
@@ -20,8 +24,10 @@ request.send();
 request.open("POST, "AJAX", true);
 request.senRequestHeader("Content-type", "application/x-www-form-urlencoded");
 request.send("name=" + UserName);
+``` 
 
-// 4. set function callback
+4. set function callback  
+```
 function callback() {
 	// readyState 0- 请求未初始化, 1- 服务器连接已建立, 2- 请求已接收, 3- 请求处理中, 4- 请求已完成，相应就绪
 	if (request.readyState == 4) { 
@@ -42,4 +48,4 @@ function fail(code) {
     var textarea = document.getElementById('test-response-text');
     textarea.value = 'Error code: ' + code;
 }
-```
+```   
