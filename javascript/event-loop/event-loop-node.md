@@ -2,7 +2,7 @@
 - timer: setTimeout, setInterval
 - I/O callbakcks: other callbacks except timer and close callback  
 - idle, prepare阶段: 仅node内部使用 
-- poll阶段: 获取新的I/O时间，适当的条件下node将阻塞在这里  
+- **poll阶段**: 执行I/O callback，适当的条件下node将阻塞在这里  
 - check: setImmediate
 - close: socket.on('close', callback)
 
