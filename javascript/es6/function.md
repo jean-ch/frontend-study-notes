@@ -27,8 +27,8 @@
 let getItem = id => {id: id, name: name}; //Error
 let getItem = id => ({id: id, name: name});
 ```
-- 箭头函数没有自己的this, arguments, super等
-	- **箭头函数的this是外层代码块的this**    
+- 箭头函数**没有自己的this, arguments, super, constructor**等
+	- 箭头函数的this是外层代码块的this    
 	- 无法用call(), apply(), bind()这些方法来改变this  
 
 ##### 箭头函数的不适用场景  
