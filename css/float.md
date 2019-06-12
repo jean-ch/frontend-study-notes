@@ -1,0 +1,2 @@
+float从原本的流布局中拿掉- 所以其他的元素会占据float元素原本在流布局中的位置   
+拿掉之后float确依然影响流布局- 表现在其他元素占据了float元素的位置但是文字确实环绕float元素的（这是和position absolute的区别）
