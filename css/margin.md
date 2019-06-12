@@ -1,5 +1,6 @@
 #### margin auto
-用来居中元素  
+用来居中元素 
+对float和absolute元素无效，因为这俩不在正常流里面   
 
 #### 负margin     
 margin参考线：  
