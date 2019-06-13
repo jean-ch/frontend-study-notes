@@ -1,15 +1,18 @@
 ### Set
 #### 构造
-new Set(arr or iterated data)    
+new Set(arr or interable data)    
 - 数组去重```[...new Set(arr)]```   
 - 字符串字符去重```[...new Set(str)].join('')```   
 - Set转成数组```Array.from(set)```   
+- NaN在set中视作相等   
+- 指向同一个地址的对象在set中视作相等  
 
 #### properties, functions   
 - size  
 - add(), has(), delete(), clear()  
+- 数组的map,  filter可以用于set
 
-#### iterate  
+#### 遍历操作    
 - keys()  
 - values()
 - [...set]    
@@ -19,7 +22,10 @@ new Set(arr or iterated data)
 ### Map  
 和Object的区别： object只能用string做key 
 **对同一个object的引用，map视作同一个key**    
-#### 构造  
-- 数组```new Map([[key1, val1], [key2, val2]])```    
+new Map(arr or set or interable data)  
 
+#### 遍历操作   
+```for (let [key, value] of map)```  
+```for (let [key] of map)```  
+```for (let [, value] of map)```  
 
