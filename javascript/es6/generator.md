@@ -1,10 +1,11 @@
 generator有两个特点  
-1. 他是一个返回iterator对象的函数  
+- 他是一个返回iterator对象的函数  
 	- 因此可以用来包装返回遍历数组   
-2. 因为yield关键字的存在，所以generator内部能够管理状态基  
-另外generator提供两个功能   
-1. 通过yiled往外部传参，通过next往generator里传参  
-2. 通过外部throw error能够在generator内部catch到，generator里throw的error也能在外部catch到       
+- 因为yield关键字的存在，所以generator内部能够管理状态基  
+
+generator提供两个功能   
+  - 通过yiled往外部传参，通过next往generator里传参  
+  - 通过外部throw error能够在generator内部catch到，generator里throw的error也能在外部catch到       
 
 #####  遍历二叉树   
 ```
