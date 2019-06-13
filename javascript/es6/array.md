@@ -28,13 +28,15 @@
 - 转换类似数组的对象，即**只要有length属性，就可以被Array.from转换**   
 	```Array.from({ length: 3 }); // [ undefined, undefined, undefined ]```   
 	- 扩展运算符也可以将某些数据转成数组   
-		- ```[... arguments]``` ```[...document.querySelectAll('div')]```   
-		- 但扩展运算符只能转换有Iterator接口的数据  
+		```[... arguments]``` ```[...document.querySelectAll('div')]```   
+	- 但扩展运算符只能转换有Iterator接口的数据  
 - **没有length属性的数据想要转换成数组，替代方法是Array.prototype.slice**```[].slice.call(obj)```   
 
 #### Array.of()   
-- 把一组值转换成数组```Array.of(1, 2, 3); // [1, 2, 3] ```  
-- **用于弥补Array()构造数组的不足- 因为参数个数不同导致Array()行为有差异, 参数个数只有一个代表指定 数组的长度**```Array(3); //[ , , ,]```   
+- 把一组值转换成数组
+	```Array.of(1, 2, 3); // [1, 2, 3] ```  
+- **用于弥补Array()构造数组的不足- 因为参数个数不同导致Array()行为有差异, 参数个数只有一个代表指定 数组的长度**
+	```Array(3); //[ , , ,]```   
 
 #### includes()  
 **和indexOf的区别： indexOf采用严格等号=== ，因此会导致对NaN的误判**    
