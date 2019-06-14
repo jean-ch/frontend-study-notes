@@ -18,4 +18,8 @@ margin为负时参考线的运动：
   - right元素的左边因为要空出left元素，所以margin-left要设成100px(left元素的宽度)  
 
 #### margin collapse   
-- only top/bottom margins collapse, won't happen on left/right margins
+两个**块级**元素会发生**垂直**方向上的margin collapse  
+避免margin collapse   
+- 改变块级元素- 设成float  
+- 设置成BFC   
+...
