@@ -20,9 +20,9 @@
     - only-if-cached：从缓存中获取 
   - 响应指令
     - public：任意一方（客户端，代理服务器等）都能缓存该资源
-    - private：只有特定用户缓存该资源
-    - no-cache：缓存前必须先确认有效性
-    - no-store 
+    - private：所有内容只有客户端可以缓存，Cache-Control的默认取值
+    - no-cache：客户端缓存内容，但是是否使用缓存则需要经过协商缓存来验证决定
+    - no-store：所有内容都不会被缓存，即不使用强制缓存，也不使用协商缓存
     - max-age
 - Pragma: HTTP1.0时的遗留字段，当值为no-cache时强制验证缓存
 - Connection
@@ -40,6 +40,7 @@
 - **Cookie**: 通过它可以在客户端保存用户状态，即使用户关闭浏览器也能继续保存   
 告诉服务器关于 Session 的信息，存储让服务器辨识用户身份的信息   
 - **Authorization**: 当客户端接收到来自WEB服务器WWW-Authenticate响应时，该头部用来回应自己的身份验证信息给服务器   
+**对应401状态码**    
 - Date: 浏览器发送数据请求的时间  
 - **If-Modified-Since**: 比较资源前后两次访问最后的修改时间是否一致，以秒为单位     
 **和响应头部的Last-Madified构成一对，用于协商缓存** 
