@@ -51,8 +51,8 @@
 - Content-length, Content-encoding, Content-type： 告诉浏览器会送的数据长度，压缩格式，类型   
 - Content-Disposition： 告诉浏览器以下在的方式打开数据   
 - Location: 配合302状态码，告诉浏览器应该去找谁   
-- Set-Cookie: 设置 http 的 Cookie
 - Age- 响应在缓存中存在了多久
+- **Set-Cookie**: 服务器端用来设置http的Cookie，每个字段对应一个cookie
 - **Date**- 响应被服务器创建的时间   
 **和Last-Modified构成一对，用于启发式缓存**
 - **Expires**: 告知客户端资源缓存失效的时间，服务器的绝对时间    
