@@ -15,6 +15,25 @@ function setCookie(name, value, day) {
 - 如果设置了过期时间，浏览器就把cookie存在硬盘(disk)中，只有过期时间到了，cookie才会被清除。存储在硬盘上的cookie可以在多个不同的浏览器进程之间共享  
 - cookie存储大概只有4kb，不适合存储大量的信息
 
+cookie的设置及发送过程 
+- 客户端发送一个http请求到服务器端
+- 服务器端发送一个http响应到客户端，其中包含Set-Cookie头部
+- 客户端发送一个http请求到服务器端，其中包含Cookie头部
+- 服务器端发送一个http响应到客户端
+
+cookie的属性 
+- name, value
+- 有效期：Expires指定具体到期时间 maxAge以秒为单位  
+默认值为-1，表示cookie保存在浏览器中，关闭浏览器将丢失 
+0表示即时删除这个cookie
+- domain + path指定浏览器发出 HTTP 请求时，哪些域名要附带这个 Cookie   
+如果没有指定该属性，浏览器会默认将其设为当前 URL 的一级域名， 比如www.example.com会设为example.com
+```
+Cookie cookie = new Cookie("username","helloweenvsfei"); // 新建Cookie
+cookie.setMaxAge(Integer.MAX_VALUE); // 设置生命周期为MAX_VALUE
+response.addCookie(cookie); // 输出到客户端
+```
+
 #### session
 - 保存在服务器端 (cookie是保存在浏览器端)
 - 服务器端存储量没有限制，但是存储的多对服务端是有一定的压力的     
