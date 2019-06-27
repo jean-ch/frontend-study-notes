@@ -10,6 +10,7 @@
 - Request Method
 - status code
 - Remote Address: 路由地址 
+- Host: 请求的主机名
 - Cache-Control: 告诉客户端如何处理缓存 
   - 请求指令
     - no-cache：强制再次验证
