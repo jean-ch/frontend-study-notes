@@ -20,7 +20,7 @@
 - Access-Control-Allow-Credentials：true表示是否允许发送Cookie。默认Cookie不包括在CORS请求之中。  
   - 如果要发送cookie需满足
     - Access-Control-Allow-Credentials: true
-    - 在AJAX请求中打开withCredentials属性  
+    - 在AJAX请求中打开**withCredentials**属性  
       ```
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
@@ -58,7 +58,7 @@ CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到以�
 - **Access-Control-Allow-Methods**： 必需，表明服务器支持的所有跨域请求的方法（为了避免多次预检请求）
 - Access-Control-Allow-Headers：表明服务器支持的所有头信息字段 
 - Access-Control-Allow-Credentials
-- Access-Control-Max-Age
+- Access-Control-Max-Age: 可选，指定本次预检请求的有效期，单位为秒
 
 #### 正式请求
 - Origin
