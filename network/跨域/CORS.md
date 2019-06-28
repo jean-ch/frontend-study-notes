@@ -1,3 +1,9 @@
+#### 和JSONP对比 
+- 支持POST等所有HTTP请求 
+- 安全性相对JSONP高
+- 需要服务器支持
+- 不兼容老版本浏览器
+
 ### 简单请求
 #### 定义
 - 请求方法局限于： 
@@ -17,6 +23,9 @@
 
 #### 回应 
 - **Access-Control-Allow-Origin**: 必须。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求
+```
+response.setHeader("Allow-Control-Allow-Origin", "*")
+```
 - Access-Control-Allow-Credentials：true表示是否允许发送Cookie。默认Cookie不包括在CORS请求之中。  
   - 如果要发送cookie需满足
     - Access-Control-Allow-Credentials: true
@@ -65,4 +74,38 @@ CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到以�
 
 #### 正式请求的回应
 - Access-Control-Allow-Origin
+
+### 代码  
+```
+function createCORSRequest(method, url) {
+  var xhr = null;
+  if ('withCredentials' in xhr) { // withCreadentials only exist in XMLHTTPRequest2
+    xhr = new XMLHttpRequest();
+    xhr.open(method, url, true); // async: true
+  } else if (typeof XDomainRequest != 'undefined') { // XDomainRequest only exist in IE 
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } 
+
+  return xhr;
+}
+
+var xhr = createCORSRequest('GET', url);
+if (!xhr) {
+  throw new Error('CORS not supported');
+}
+
+xhr.onload = function() {
+  var text = xhr.responseText;
+  ...
+}
+
+xhr.onerror = function() {
+  ...
+}
+
+xhr.send();
+   
+}
+```
 
