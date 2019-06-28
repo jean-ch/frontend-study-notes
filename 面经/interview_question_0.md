@@ -47,13 +47,13 @@ console.log(new Date, i);
 ###### promise 
 ```
 const tasks = [];
-for (var i = 0; i < 5; i++) {   // 这里 i 的声明不能改成 let，如果要改该怎么做？
+for (var i = 0; i < 5; i++) {   // 这里 i 的声明不能改成 let，因为for结束后还有一个consolelog用到i的上限值
     ((j) => {
         tasks.push(new Promise((resolve) => {
             setTimeout(() => {
                 console.log(new Date, j);
-                resolve();  // 这里一定要 resolve，否则代码不会按预期 work
-            }, 1000 * j);   // 定时器的超时时间逐步增加
+                resolve();  // 一定要在setTimeout的callback执行末尾resolve
+            }, 1000 * j);   // 定时器的超时时间逐步增加，因为这几个timeout是一起放进jobqueue的
         }));
     })(i);
 }
@@ -64,27 +64,6 @@ Promise.all(tasks).then(() => {
     }, 1000);   // 注意这里只需要把超时设置为 1 秒
 });
 ``` 
-```
-const tasks = []; // 这里存放异步操作的 Promise
-const output = (i) => new Promise((resolve) => {
-    setTimeout(() => {
-        console.log(new Date, i);
-        resolve();
-    }, 1000 * i);
-});
-
-// 生成全部的异步操作
-for (var i = 0; i < 5; i++) {
-    tasks.push(output(i));
-}
-
-// 异步操作完成之后，输出最后的 i
-Promise.all(tasks).then(() => {
-    setTimeout(() => {
-        console.log(new Date, i);
-    }, 1000);
-});
-```
 
 ###### async
 ```
