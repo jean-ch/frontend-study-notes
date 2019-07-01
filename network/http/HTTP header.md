@@ -53,6 +53,7 @@
 - Content-Disposition： 告诉浏览器以下在的方式打开数据   
 - Location: 配合302状态码，告诉浏览器应该去找谁   
 - Age- 响应在缓存中存在了多久
+- **Location**: **对应301, 302状态码**，给出重定向的地址，浏览器自动连接
 - **Set-Cookie**: 服务器端用来设置http的Cookie，每个字段对应一个cookie
 - **Date**- 响应被服务器创建的时间   
 **和Last-Modified构成一对，用于启发式缓存**
