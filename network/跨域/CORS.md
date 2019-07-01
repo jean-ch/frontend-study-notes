@@ -1,3 +1,6 @@
+#### CORS (Cross-Origin-Resource-Sharing)
+跨域资源共享
+
 #### 和JSONP对比 
 - 支持POST等所有HTTP请求 
 - 安全性相对JSONP高
