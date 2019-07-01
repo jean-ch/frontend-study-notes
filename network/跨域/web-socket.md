@@ -8,7 +8,7 @@
 - 没有同源限制，客户端可以与任意服务器通信
 
 #### API
-- new WebSocket('ws://localhost:8080')
+- new WebSocket('ws://localhost:8080')必须是绝对url
 - readyState
   - CONNECTING: 0
   - OPEN: 1
@@ -18,4 +18,4 @@
 - onclose
 - onmessage
 - onerror
-- send() 用于向服务器发送数据
+- send(JSON.stringify(message)) 用于向服务器发送序列化的数据
