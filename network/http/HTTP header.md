@@ -1,10 +1,3 @@
-#### HTTP Header
-##### 响应头部字段
-- ETag: 服务器生成资源的唯一标识
-- Vary: 代理服务器缓存的管理信息
-- Age: 资源在缓存代理中存贮的时长(取决于max-age和s-maxage的大小)的修改　　
-- If-None-Match: 和If-Match作用相反，服务器根据这个字段判断文件是否有新的修改
-
 ##### 通用头部字段
 - Request URL
 - Request Method
@@ -33,7 +26,15 @@
 - Date: 创建报文的日期时间，启发式缓存阶段会用到   
 
 ##### 请求头部字段
-- Accept, Accept-Charset, Accept-Encoding, Accept-Language: 告诉服务器自己接受的类型，字符集，编码方法(是否压缩), 语言   
+- Accept
+标记客户端能理解的MIME type，如test/html, application/xml, image/png   
+协商字段，和Content-Type构成一对    
+- Accept-Encoding
+标记客户端支持的压缩格式     
+协商字段，和Content-Encoding构成一对  
+- Accept-Language
+标记客户端可理解的自然语言   
+协商字段，和Content-Language构成一对     
 - Host: 浏览器要找的主机
 - Refer：告诉页面是从哪个页面跳转来的   
 常用语防止下载，盗链   
@@ -49,7 +50,18 @@
 **和响应头部的Etag构成一对，用于协商缓存**  
 
 ##### 响应头部字段 
-- Content-length, Content-encoding, Content-type： 告诉浏览器会送的数据长度，压缩格式，类型   
+- Content-Type
+MIME type    
+协商字段，和Accept构成一对   
+- Content-Encoding
+压缩格式      
+协商字段，和Accept-Encoding构成一对 
+- Content-Language  
+自然语言   
+协商字段，和Accept-Language构成一对     
+协商字段对应的value以，间隔，可以用p=来标明权重
+间隔符号，优先级大于；
+- Vary: 标明内容协商时的参考头字段
 - Content-Disposition： 告诉浏览器以下在的方式打开数据   
 - Location: 配合302状态码，告诉浏览器应该去找谁   
 - Age- 响应在缓存中存在了多久
