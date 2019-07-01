@@ -49,7 +49,7 @@ arr.reduce(callback(accumulator, currentValue, index), initialValue)
 - sort(function compare(a, b) {})    
 - reverse()
 
-#### interator
+#### iterator
 - arr.keys()
 - arr.values()
 - arr.forEach(callback(element, index, arr))
