@@ -21,10 +21,10 @@ set = new Set([...set].map(val => val * 2));
 - values()
 - [...set]    
 - entries()- 键名和键值是同一个值   
-- forEach- 键名和键值是同一个值　
+- forEach((key, val) => {})- 键名和键值是同一个值　
 
 ### Map  
-和Object的区别： object只能用string做key 
+和Object的区别： object只能用string做key      
 **对同一个object的引用，map视作同一个key**    
 new Map(arr or set or interable data)  
 
