@@ -7,3 +7,10 @@
 1. iframe会阻塞主页面的Onload事件
 2. 即时内容为空，加载也需要时间
 3. 没有语意
+
+###### 获取iframe内容
+- iframeElement.**contentWindow**
+- window.**frames**[iframe_name]
+
+###### iframe中调用父元素 
+- window.**parent**.document.getElementById(), window.parent.document.method()
