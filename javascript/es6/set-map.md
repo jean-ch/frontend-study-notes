@@ -10,7 +10,11 @@ new Set(arr or interable data)
 #### properties, functions   
 - size  
 - add(), has(), delete(), clear()  
-- 数组的map,  filter可以用于set
+- 数组的map,  filter可以间接用于set  
+```
+set = new Set([...set].filter(x => (x % 2) == 0));
+set = new Set([...set].map(val => val * 2));
+```
 
 #### 遍历操作    
 - keys()  
