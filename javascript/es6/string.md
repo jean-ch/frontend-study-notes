@@ -13,6 +13,16 @@ not legal.`
 `${obj.x + obj.y}` //大括号内可以放任意表达式  
 ```  
 
+- 标签模板
+```
+let a = 5;
+let b = 10;
+
+tag`Hello ${ a + b } world ${ a * b }`;
+// 等同于
+tag(['Hello ', ' world ', ''], 15, 50);
+```
+
 #### 方法 
 - indexOf（传统）  
 - includes()
