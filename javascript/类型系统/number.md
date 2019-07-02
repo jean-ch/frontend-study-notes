@@ -1,10 +1,15 @@
 #### 方法  
 - Number.isFinite(Infinity)  
 - Number.isNaN()  
-与传统全局上的isFinite, isNaN的区别：   
+	与传统全局上的isFinite, isNaN的区别：   
 	- 传统方法先调Number()    
 	- Number.isFinite(), Number.isNaN()只对Number型数据有效，对于非Number型数据返回false   
 - Number.parseInt()  
+	和Number的区别：	
+	- 省略开始的空字
+	- 只识别数字，符号，其他return NaN```Number.parseInt('') == NaN```
+	- 省略非数组```Number.parseInt('123aaa') == 123```
+	- 小数点不识别```Number.parseInt('22.5') == 22```
 - Number.isInteger()  
 	- 只处理Number型数据   
 	- 对精度值有误判：   
