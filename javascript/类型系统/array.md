@@ -43,6 +43,8 @@
 #### 检测数组 
 - arr instanceof Array
 - Array.is(arr) 
+- arr.constructor === Array
+- Object.prototype.toString.call(arr) === "[Object Array]"
 
 #### concat, slice, splice
 - slice return数组的浅拷贝
