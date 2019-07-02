@@ -22,9 +22,31 @@
 	```[...map.keys()];```
 
 ### API
+#### 转换数组： Array.from(), 扩展运算符, Array.prototype.slice, Array.of()
+- Array.from(array-like, mapFunc)
+	- array-like: 
+		- arguments, nodeList
+		- 提供了iterator接口的数据: set, map
+		- **有length属性的数据**：  
+		```Array.from({ length: 3 }); // [ undefined, undefined, undefined ]```   
+- 扩展运算符  
+```[... arguments]``` ```[...document.querySelectAll('div')]```   
+	- 只能转换有Iterator接口的数据  
+- Array.prototype.slice
+	- 转换没有length属性的数据
+- Array.of()   
+	- 把一组值转换成数组  
+	```Array.of(1, 2, 3); // [1, 2, 3] ```  
+	- **用于弥补Array()构造数组的不足- 因为参数个数不同导致Array()行为有差异, 参数个数只有一个代表指定 数组的长度**  
+	```Array(3); //[ , , ,]```  
+
+#### 检测数组 
+- arr instanceof Array
+- Array.is(arr) 
+
 #### concat, slice, splice
 - slice return数组的浅拷贝
-- splice 改变原数组，return包含所有被删除元素的array
+- splice 改变原数组，return包含所有被删除元素的array. ssplice(startIndex, count, item1, item2..)
 
 #### push, pop, shift, unshift
 - push, pop 向数组的尾端插入/删除
@@ -58,20 +80,4 @@ arr.reduce(callback(accumulator, currentValue, index), initialValue)
 - fill(value, startIndex, endIndex)
 
 #### flat
-- flat(depth)
-
-#### 转换成数组： Array.from(), 扩展运算符, Array.prototype.slice, Array.of()
-- Array.from(array-like, mapFunc)
-	- array-like: 
-		- arguments, nodeList
-		- 提供了iterator接口的数据: set, map
-		- **有length属性的数据**：```Array.from({ length: 3 }); // [ undefined, undefined, undefined ]```   
-- 扩展运算符```[... arguments]``` ```[...document.querySelectAll('div')]```   
-	- 只能转换有Iterator接口的数据  
-- Array.prototype.slice
-	- 转换没有length属性的数据
-- Array.of()   
-	- 把一组值转换成数组  
-	```Array.of(1, 2, 3); // [1, 2, 3] ```  
-	- **用于弥补Array()构造数组的不足- 因为参数个数不同导致Array()行为有差异, 参数个数只有一个代表指定 数组的长度**  
-	```Array(3); //[ , , ,]```   
+- flat(depth) 
