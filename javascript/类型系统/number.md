@@ -1,9 +1,11 @@
 #### 方法  
 - Number.isFinite(Infinity)  
 - Number.isNaN()  
-	与传统全局上的isFinite, isNaN的区别：   
-	- 传统方法先调Number()    
-	- Number.isFinite(), Number.isNaN()只对Number型数据有效，对于非Number型数据返回false   
+	- NaN !== NaN
+	- Object.is(NaN, NaN) === true
+	- 与传统全局上的isFinite, isNaN的区别：   
+		- 传统方法先调Number()    
+		- Number.isFinite(), Number.isNaN()只对Number型数据有效，对于非Number型数据返回false   
 - Number.parseInt()  
 	和Number的区别：	
 	- 省略开始的空字
