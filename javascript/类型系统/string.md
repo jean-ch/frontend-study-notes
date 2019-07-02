@@ -24,9 +24,9 @@ tag(['Hello ', ' world ', ''], 15, 50);
 ```
 
 #### 方法 
-- indexOf（传统）  
-- includes()
-- startsWith() 
-- endsWith() 
+- indexOf(), includes()
+- split()
+- search(regex), replace(refex, str)
+- startsWith(), endsWith() 
 - repeat(n)   
 - trim(), trimStart(), trimEnd()  
