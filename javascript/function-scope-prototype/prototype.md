@@ -66,21 +66,21 @@ function SubType(name, age) {
 ##### 组合继承
 ```
 function SuperType(name) {
-    this.colors = ['red', 'blue'];
-    this.name = name;
+    this.colors = ['red', 'blue']; // 引用类型放实例上
+    this.name = name; // 传参
 }
 
-SuperType.prototype.sayName = function() {
-    alert(this.name);
+SuperType.prototype.sayName = function() { // 复用的方法放原型上
+    alert(this.name); 
 };
 
 function SubType(name, age) {
-    SuperType.call(this, name);
+    SuperType.call(this, name); // 借用构造函数- 传参， 引用类型放实例上
     this.age = age;
 }
 
-SubType.prototype = new SuperType();
-SubType.constructor = new SubType();
+SubType.prototype = new SuperType(); // 继承原型
+SubType.constructor = SubType; // 把prototype整个替换之后要把constructor指回来
 SubType.prototype.sayAge = function() {
     alert(this.age);
 }
