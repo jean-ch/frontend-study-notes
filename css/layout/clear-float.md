@@ -29,7 +29,7 @@
 .clear{clear:both; height: 0; line-height: 0; font-size: 0}
 ```
 ##### 父元素overflow: auto
-overflow: visible是不能够清除浮动的
+overflow: visible不能够清除浮动的
 ```
 .outer{
     overflow: auto; 
@@ -38,7 +38,7 @@ overflow: visible是不能够清除浮动的
 
 ##### 用:after插入一个清除浮动的元素
 ```
-.outer:after {
+.outer::after {
   clear:both;
   content:'.';
   display:block;
