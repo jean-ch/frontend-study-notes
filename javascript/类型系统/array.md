@@ -62,7 +62,8 @@
 - find(callback(element, index, arr))
 
 #### filter, map, every, some
-callback都接受三个参数 element, index, 原array
+- 第一个参数是callback函数，callback都接受三个参数 element, index, 原array
+- 第二个参数指定callback里的this
 
 #### reduce
 arr.reduce(callback(accumulator, currentValue, index), initialValue)
