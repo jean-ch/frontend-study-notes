@@ -121,11 +121,11 @@ add.bind(sub, 5, 3)(); // 调用后，返回 8
         - 然后用fBind.prototype = new Fn()实现new操作的继承
 ```
 Function.prototype.bind(context) {
-    if (typeof context !== 'function') {
+    let self = this;
+    if (typeof self !== 'function') {
         return;
     }
 
-    let self = this;
     context = context ? Object(context) : window;
     let bindArgs = [...arguments].slice(1);
     function() fBind{
