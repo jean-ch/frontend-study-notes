@@ -1,2 +1,5 @@
-box-sizing: border-box;  
-设置了box-sizing之后width和height是加上了padding和border之后box的total width/height
+box-sizing: 
+- content-box: default    
+border和padding不计算入width之内
+- border-box
+border和padding计算入width之内
