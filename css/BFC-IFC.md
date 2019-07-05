@@ -1,16 +1,17 @@
-Block Formatting Context- 块格式化上下文
+Block Formatting Context- 块格式化上下文   
+内部子元素再怎么翻江倒海，翻云覆雨都不会影响外部的元素
 
 ####  创建一个BFC    
-- float不为none  
-- position不为static 或relative   
-- display为table-cell, table-caption, inline-block, flex, inline-flex   
-- overflow为visible   
+- float: left | right 
+- position: absolute | fixed   
+- display: table-cell | table-caption | inline-block, flex, inline-flex   
+- overflow: hidden | auto | scroll   
 
 最简单没有副作用的方法是overflow: hidden  
 
 #### BFC盒子   
 - BFC盒子中的内部元素会从上倒下垂直放置   
-- BFC内部盒子们垂直方向上的margin由元素盒子本身决定而不是简单的两个相邻盒子的margin之和   
+- BFC内部盒子们垂直方向上的margin由元素盒子本身决定而不是简单的两个相邻盒子的margin之和 
 
 - BFC内部float box不会和同级的BFC区域重合    
 BFC中每个盒子的左边框都紧挨着BFC container的左边框  
