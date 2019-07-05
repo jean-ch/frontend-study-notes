@@ -7,7 +7,11 @@
 #### absolute  
 从正常文档流中拿出来。   
 绝对位置的偏移是针对最近的**非static**的祖先做出的 
-因此要想absolute针对某个父元素做出偏移，这个父元素的位置大多是relative的(不设置top left等relative的位置和static一样)      
+因此要想absolute针对某个父元素做出偏移，这个父元素的位置大多是relative的(不设置top left等relative的位置和static一样)  
+- 从流布局中拿掉
+- 产生包裹性- div的宽度本来是占一整行，设成absolute之后对内容产生包裹性，宽度自适应
+- 高度欺骗- 父元素的    
+- 分层- 文字不环绕
 
 #### fixed    
 跟absolute一样从正常文档流中拿出来了  
