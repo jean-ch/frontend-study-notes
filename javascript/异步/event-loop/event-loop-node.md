@@ -1,9 +1,9 @@
 #### Node中的event loop  
-- timer: setTimeout, setInterval
+- **timer**: setTimeout, setInterval
 - I/O callbakcks: other callbacks except timer and close callback  
 - idle, prepare阶段: 仅node内部使用 
-- **poll阶段**: 执行I/O callback，适当的条件下node将阻塞在这里  
-- check: setImmediate
+- poll阶段: 执行I/O callback，适当的条件下node将阻塞在这里  
+- **check**: setImmediate
 - close: socket.on('close', callback)
 
 #### micro task的执行时机 
@@ -34,11 +34,11 @@ setTimeout(()=>{ //setTimeout2
 假设先执行setImmediate
 - 把setImmediate1加入task队列 
 - 把setTimeout2加入task队列 
-- 执行setImmediate1，***输出'setImmediate1'***, 把setTimeout1加入task队列 
-- 执行先放进去的setTimeout2，***输出'setTimeout2'***。 把nextTick放入microtask队列，把setImmediate2放入task队列 
-- 检查到nextTick，插入执行nextTick，***输出'nextTick'***     
-- 执行setImmediate2, ***输出'setImmediate2'***    
-- 执行setTimeout1, ***输出'setTimeout1'***   
+- 执行setImmediate1，**输出'setImmediate1'**, 把setTimeout1加入task队列 
+- 执行先放进去的setTimeout2，**输出'setTimeout2'**。 把nextTick放入microtask队列，把setImmediate2放入task队列 
+- 检查到nextTick，插入执行nextTick，**输出'nextTick'**     
+- 执行setImmediate2, **输出'setImmediate2'**    
+- 执行setTimeout1, **输出'setTimeout1'**  
 
 ##### io阶段setImmediate优先于setTimeout
 ```
