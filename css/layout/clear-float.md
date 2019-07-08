@@ -38,7 +38,7 @@ overflow: visible不能够清除浮动的
 }
 ```
 
-##### 用:after插入一个清除浮动的元素
+##### 用::after插入一个清除浮动的元素
 ```
 .outer::after {
   clear:both;
