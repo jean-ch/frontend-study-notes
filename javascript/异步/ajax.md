@@ -45,12 +45,12 @@ request.open("GET, url, true);
 ``` 
 ##### set request header，在open之后send之前
 ```
-request.senRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhr.senRequestHeader("Content-type", "application/x-www-form-urlencoded");
 ```
 ##### send xhr
 ```
 xhr.send(null)// Get请求没有content body, send传入null
-xhr.request.send("name=" + UserName);//Post请求传入content body
+xhr.send("name=" + UserName);//Post请求传入content body
 ```
 
 #### GET
