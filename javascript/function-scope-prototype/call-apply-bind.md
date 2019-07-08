@@ -23,7 +23,7 @@ delete person.bar;
 ```
 ##### 模拟实现 
 - this是调用的函数，用typeof 判断this是否是一个函数
-- context是调用函数的执行环境
+- context是调用函数的执行环境, 没有传context的话context理应指向window
 - 相当于在调用函数的context上增加一个函数方法（也就是this），取得调用结果后再删除
 ```
 Function.prototype.call(context) {
