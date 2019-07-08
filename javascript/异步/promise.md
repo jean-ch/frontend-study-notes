@@ -1,10 +1,10 @@
-Promise解决了多层callback传统写法下层叠套用的问题，通过维护状态(pending, resolveed, rejected), 传递状态，利用promise提供的then, all等接口来实现链式调用   
+Promise解决了多层callback传统写法下层叠套用的问题，通过维护状态(pending, resolved, rejected), 传递状态，利用promise提供的then, all等接口来实现链式调用   
    
-### promise写法  
+#### promise写法  
 - resolve方法的作用是把pending变成resolved，在异步操作成功时调用，并将异步操作的结果，作为参数传递出去        
 - reject方法的作用是把pending变成rejected， 在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去  
 - resolve和reject之后代码还会继续执行，then和catch中的callback在本轮事件循环结束时执行         
-- then可以接收两个参数，第一个参数在resolved下调用，第二个在rejected下调用（可省略）       
+- then可以接收两个参数，第一个参数在resolved下调用，第二个在rejected下调用（可省略）   
 - catch用来捕获错误（发生错误时promise的状态由pending变成rejected，调用catch），promise和then发生的错误都会被catch 
 - promise和catch中抛出的错误外层没有catch会被promise吃掉，抛出错误后报错，但是外部代码还是会继续执行    
 - then的第二个func参数和catch的区别：在then的第一个func参数中抛出的错误第二个参数捕捉不到，也就是then的第二个参数只捕捉promise抛出的错误    
@@ -27,7 +27,7 @@ new Promise(function(resolve, reject) {
 })
 ```  
 
-### 串行执行一系列promise  
+#### 串行执行一系列promise  
 - 能够实现链式写法的原因是在then和catch都返回一个新的Promise实例对象        
 - 前面一个then完成后将return的结果作为参数传给第二个then  
 - then的返回如何包装成Promise
@@ -60,7 +60,7 @@ promise.then(multiply)
    		});
 ```  
  
-### 用promise封装一个ajax 
+#### 用promise封装一个ajax 
 ```
 funtion ajax(method, url, data) {
 	var request = new XMLHttpRequest();
@@ -87,8 +87,8 @@ promise.then(function(text) {
 });
 ```  
 
-### 并行执行一系列promise 
-#### Promise.all()- 多个任务并行执行 
+#### 并行执行一系列promise 
+##### Promise.all()- 多个任务并行执行 
 ```
 var p1 = new Promise(function(resolve, reject) {
 	setTimeOut(resolve, 500, 'p1');
@@ -102,27 +102,29 @@ Promise.all([p1, p2]).then(function(results) {
 });
 ``` 
 
-#### Promise.race()- 容错，多个任务返回最先结果即可
+##### Promise.race()- 容错，多个任务返回最先结果即可
 ```
 Promise.race([p1, p2]).then(function(result) {
 	console.log(result);	
 });
 ```
 
-### 几道题  
-then传非函数造成值穿透  
+#### interview questions  
+##### then传非函数造成值穿透  
 ```
 Promise.resolve(1)
   .then(2)
   .then(Promise.resolve(3))
   .then(console.log);
-// 解析：p.then、.catch 的入参应该是函数，传入非函数则会发生值穿透；
 // 答案：1
 ``` 
-叠用promise时的执行顺序    
+1
+- then和catch期望的都是一个函数。当接收的不是函数而是值的时候会发生值穿透
+- 于是1会一路传给最后一个then，相当于console.log(1)
+##### 叠用promise时的执行顺序    
 ```
 new Promise(resolve => { // p1
-    resolve(1);
+    resolve(1); // 为什么1在2后面打印呢： 因为p1走到这就resolve了，但是它不会马上调到他的resolve方法上面去执行，它仍然会
     
     // p2
     Promise.resolve().then(() => {
@@ -135,33 +137,26 @@ new Promise(resolve => { // p1
 });
 
 console.log(3);
-// 解析：
-// 1. new Promise(fn), fn 立即执行，所以先输出 4；
-// 2. p1和p2的Promise在执行then之前都已处于resolve状态
-//    resolve(1)是立即执行的resolve，放在本轮时间循环的末尾执行
-//    故按照then执行的先后顺序，将t1、t2放入microTask中等待执行；
-// 3. 完成执行console.log(3)后，macroTask执行结束，然后microTask
-//    中的任务t1、t2依次执行，所以输出3、2、1；
-// 答案：
-// 4 3 2 1
 ```  
+4 3 2 1
+- 4和3是同步任务，按顺序输出
+- p1, p2都到达resolve状态，按代码顺序先将t1放入microtask队列，再执行p1的resolve函数，将t2放入microtask队列。因此先输出2在输出1
+
 ```
 Promise.reject('a')
-  .then(()=>{  
-    console.log('a passed'); 
-  })
-  .catch(()=>{  
-    console.log('a failed'); 
-  });  
-Promise
-  .reject('b')
-  .catch(()=>{  
-    console.log('b failed'); 
-  })
-  .then(()=>{  
-    console.log('b passed');
-  })
-
+.then(()=>{  
+	console.log('a passed'); 
+})
+.catch(()=>{  
+	console.log('a failed'); 
+});  
+Promise.reject('b')
+.catch(()=>{  
+	console.log('b failed'); 
+})
+.then(()=>{  
+	console.log('b passed');
+})
 // 解析：p.then(fn)、p.catch(fn)中的fn都是异步执行，上述代码可理解为：
 //       setTimeout(function(){
 //             setTimeout(function(){
@@ -175,11 +170,39 @@ Promise
 //                  console.log('b passed'); 
 //             });
 //       });
-// 答案：b failed
-//       a failed
-//       b passed
 ```
+b failed, a failed, b passed
 
-https://javascript.ruanyifeng.com/advanced/promise.html
-http://es6.ruanyifeng.com/#docs/promise
-https://developers.google.com/web/fundamentals/primers/promises
+##### 红灯3秒亮一次，绿灯1秒亮一次，黄灯2秒亮一次；如何让三个灯不断交替重复亮灯
+```
+function Light(color) {
+    this.color = color;
+}
+
+Light.prototype.on = function() {
+    console.log(this.color);
+}
+
+let red = new Light('red');
+let green = new Light('green');
+let yellow = new Light('yellow');
+
+function switchLight(timmer, light) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            light.on();
+            resolve();
+        }, timmer);
+    });
+}
+
+function step() {
+    Promise.resolve().then(() => {
+        return switchLight(3000, red);
+    }).then(() => {
+        return switchLight(1000, green);
+    }).then(() => {
+        return switchLight(2000, yellow);
+    })
+}
+```
