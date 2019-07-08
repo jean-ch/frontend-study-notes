@@ -43,7 +43,7 @@ function debounce(fun, delay) {
     return function () {
         const that = this;
         const args = arguments;
-        timer && clearTimeout(timer);
+        clearTimeout(timer);
         timer = setTimeout((() => fun.apply(this, args)), delay)
     }
 }
@@ -59,10 +59,10 @@ function debounce(func, delay, immediate) {
         const args = arguments;
         timer && clearTimeout(timer);
 		if (immediate) {
-			func.call(this, arguments);
+			func.apply(this, arguments);
 			setTimeout(() => timer = null, delay);
 		} else { 
-			setTimeout(() => func.call(that, args), delay);
+			setTimeout(() => func.apply(that, args), delay);
 		}
 	};
 }
@@ -76,7 +76,7 @@ function debounce(func, delay) {
         const args = arguments;
         return new Promise((resolve, reject) =>
             timer && clearTimeout(timer);
-            setTimeout(() => func.appy(that, args), delay);
+            setTimeout(() => func.apply(that, args), delay);
         )
     }
 }
