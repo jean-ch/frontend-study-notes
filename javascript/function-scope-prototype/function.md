@@ -66,6 +66,7 @@ const obj = {
 ```
 
 2. 原型方法 
+this指向全局
 ```
 function Cat (name) {
     this.name = name;
@@ -82,6 +83,7 @@ Cat.prototype.sayCatName = function () {
 };
 ```  
 3. 事件的回调  
+this指向window，无法指向dom
 ```
 const btn = document.getElementById('myButton');
 btn.addEventListener('click', () => {
