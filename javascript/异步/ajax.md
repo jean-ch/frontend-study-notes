@@ -31,7 +31,7 @@ else {
 ```
 xhr.onreadystatechange = function() {
 	if (request.readyState == 4) { 
-		if ((request.status >= 200 && xhr < 300) || xhr == 304) {
+		if ((request.status >= 200 && request.status < 300) || xhr == 304) {
 			return success(request.responseText); 
 		} else {
 			return fail(request.status);
@@ -45,12 +45,12 @@ request.open("GET, url, true);
 ``` 
 ##### set request header，在open之后send之前
 ```
-xhr.senRequestHeader("Content-type", "application/x-www-form-urlencoded");
+request.senRequestHeader("Content-type", "application/x-www-form-urlencoded");
 ```
 ##### send xhr
 ```
-xhr.send(null)// Get请求没有content body, send传入null
-xhr.send("name=" + UserName);//Post请求传入content body
+request.send(null)// Get请求没有content body, send传入null
+request.send("name=" + UserName);//Post请求传入content body
 ```
 
 #### GET
