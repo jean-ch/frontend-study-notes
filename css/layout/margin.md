@@ -23,8 +23,15 @@
   ```   
 
 #### margin collapse   
-两个**块级**元素会发生**垂直**方向上的margin collapse  
-避免margin collapse   
-- 改变块级元素- 设成float  
-- 设置成BFC   
-...
+##### 发生条件
+- 垂直方向
+- 块级元素
+- 相邻： 没有被非空内容、padding、border 或 clear 分隔开
+  - 一个元素的margin-top会和它普通流中的第一个子元素(非浮动元素等)的 margin-top 相邻
+  - 只有在一个元素的height是auto的情况下，它的margin-bottom才会和它普通流中的最后一个子元素(非浮动元素等)的margin-bottom相邻
+- 处于同一个BFC
+
+##### 避免margin collapse   
+- 改变块级元素- 设成float, inline-block, position: absolute
+- BFC不和其子元素发生margin折叠  
+- 相邻元素设置成单独的BFC   
