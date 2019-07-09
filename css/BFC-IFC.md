@@ -11,12 +11,14 @@ Block Formatting Context- 块格式化上下文
 
 #### BFC盒子   
 - BFC盒子中的内部元素会从上倒下垂直放置   
+
 - BFC内部盒子们垂直方向上的margin由元素盒子本身决定而不是简单的两个相邻盒子的margin之和 
 
-- BFC内部float box不会和同级的BFC区域重合    
+- float不和同级的BFC区域重合    
 BFC中每个盒子的左边框都紧挨着BFC container的左边框  
 包括float元素也会和左边框对齐，那么float元素就会和其他盒子的左边框重叠   
 除非float覆盖的盒子是个独立的BFC，那么它的盒子会因为float元素的存在而缩小，不再与float重合  
+
 - 计算BFC的高度时，float元素也参与计算    
 
 ##### BFC造成margin collapse   
