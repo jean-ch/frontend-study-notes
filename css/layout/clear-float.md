@@ -30,8 +30,8 @@
 </div>
 .clear{clear:both; height: 0; line-height: 0; font-size: 0}
 ```
-##### 父元素overflow: auto
-overflow: visible不能够清除浮动的
+##### 父元素BFC
+父元素overflow: auto | hidden设置成BFC，父元素的高度将被float撑起来，达到清除浮动的效果
 ```
 .outer{
     overflow: auto; 
