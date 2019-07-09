@@ -3,12 +3,8 @@
 对float和absolute元素无效，因为这俩不在正常流里面   
 
 #### 负margin     
-margin参考线：  
-  - top/left以相连元素的边界作为参考线     
-  - bottom/right以本元素的边界作为参考线   
-margin为负时参考线的运动：  
-  - top/left将相连元素的边界往外推   
-  - bottom/right将本元素的边界往里拉    
+  - top/left往外推   
+  - bottom/right往里拉    
 应用：   
 - 边框去重- 不希望tab元素和父元素都加上边框    
   - margin-left: -1px(border width);   
