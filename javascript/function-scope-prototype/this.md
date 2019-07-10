@@ -91,21 +91,6 @@ obj.method(fn, 10, 5, 2, 6);
 10, 5
 
 - 数组的方法调用，this指向数组
-```
-var length = 10;
-function fn () {
-    console.log(this.length);
-}
-var obj = {
-    length: 5,
-    method: function (fn) {
-        fn(); //fn在obj上调用，this指向obj
-        arguments[0](); //arguments[0]是fn，此时的context是arguments，this.length是arguments.length
-    }
-};
-obj.method(fn, 1);
-```
-10, 2  
 
 ```
 var length = 10;
