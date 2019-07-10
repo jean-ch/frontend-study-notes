@@ -1,14 +1,8 @@
 #### cookie 
-```
-document.cookie = "username=John Doe"
+- 浏览器：document.cookie
+- 服务器：response header中的Set-Cookie
+- cookie按域名分类存储     
 
-function setCookie(name, value, day) {
-	var d = new Date();
-	d.setTime(d.getTime() + day * 24 * 60 * 60 * 1000);
-	expires = `expires = ${d.toUTCString()}`;
-	document.cookie = `${name}=${value}; ${expires};`;
-}
-```  
 浏览器用来记录用户身份
 - 保存在浏览器端（session是保存在服务器端）
 - 会话cookie： 不设置过期时间，存储在内存(memory)当中，关闭浏览器窗口cookie就消失
