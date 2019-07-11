@@ -8,7 +8,7 @@ var singleton = {
 模块模式添加私有变量和特权方法
 ```
 var singleton = function() {
-  //私有变量
+  //私有变量和私有方法
   var components = new Array();
 
   //初始化
@@ -37,11 +37,11 @@ var singleton = function() {
   var o = new BaseComponent();
 
   //添加公共接口
-  app.getComponentCount = function() {
+  o.getComponentCount = function() {
     return components.length;
   };
     
-  app.registerComponent = function() {
+  o.registerComponent = function() {
     if (typeof component == 'object') {
       components.push(component);
     }
@@ -49,4 +49,32 @@ var singleton = function() {
 
   return o;
 }
+```
+节约资源，使用时才初始化
+```
+var Singleton = (function () {
+    var instantiated;
+    function init() {  //用另一个构造函数来初始化
+        /*这里定义单例代码*/
+        return {
+            publicMethod: function () {
+                console.log('hello world');
+            },
+            publicProperty: 'test'
+        };
+    }
+
+    return {
+        getInstance: function () {
+            if (!instantiated) {
+                instantiated = init();
+            }
+            
+            return instantiated;
+        }
+    };
+})();
+
+/*调用公有的方法来获取实例:*/
+Singleton.getInstance().publicMethod();
 ```
