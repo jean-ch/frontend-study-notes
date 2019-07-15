@@ -90,6 +90,8 @@ class Singleton {
     if (!this.instance) {
       this.instance = new Singleton(name);
     }
+
+    return instance;
   }
 }
 ```
