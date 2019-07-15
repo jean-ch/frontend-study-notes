@@ -72,11 +72,11 @@ setTimeout
 */
 ```
 **为什么promise2在async1 end之前打印**
-- 执行到async1中的await async2()时，先执行console.log('async2')， 然后返回一个promise
+- 执行到async1中的await async2()时，先执行console.log('async2')， 然后sync2返回一个promise
 - 这个返回的promise会放到任务队列中等待执行。await让出执行栈。继续往下执行
 - 继续执行到了new Promise，先把console.log('promise1')打印出来。然后把resolve任务放入任务队列中等待执行
 - 全部同步任务执行完之后。看向任务队列
-- 先把async返回的promise拿出来执行。这个promise有个默认resolve函数，传入的参数是undefined，把这个resolve任务放入任务队列
+- 先把async2返回的promise拿出来执行。这个promise有个默认resolve函数，传入的参数是undefined，把这个resolve任务放入任务队列
 - 然后把promise的resolve任务拿出来，执行console.log('promise2')
 - 任务队列的最后是执行默认async2返回的promise的默认resolve，它啥也没干，但是它让await async2()终于有了返回结果
 - 于是最后执行console.log('async1 end')
