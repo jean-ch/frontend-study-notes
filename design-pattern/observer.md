@@ -1,18 +1,26 @@
-应用： observable中传入的对象data change触发observe函数自动执行 
 ```
-const person = observable({
-  name: '张三',
-  age: 20
-});
-
-function print() {
-  console.log(`${person.name}, ${person.age}`)
+Publisher.prototype.publish = function(news) {
+    var publisher = this;
+    this.subscribers.forEach(subscribe => subscribe(news, publisher));
+    return this;
 }
 
-observe(print);
-person.name = '李四';
-// 输出
-// 李四, 20
+Function.prototype.subscribe = function(publish) {
+    var subscriber = this;
+    var exist = publish.subscribers.some(item => item === subscriber);
+    if (!exist) {
+        publish.subscribers.push(subscriber);
+    }
+
+    return this;
+}
+
+Function.prototype.unsubscribe = function(publish) {
+    var subscriber = this;
+    publish.subscribers.filter(item => item !== subscriber);
+    return this;
+}
+
 ```
 
 #### 用proxy实现观察者模式   
@@ -27,6 +35,6 @@ function set(target, key, value, receiver) {
   queuedObservers.forEach(observer => observer());
   return result;
 }
-//先定义一个set几个，将所有观察者函数放入这个集合
-observable函数返回一个代理，拦截原始对象的set操作，每一个set都自动执行相对应的观察者
+//将所有观察者函数放入set
+//observable函数返回一个代理，拦截原始对象的set操作，每一个set都自动执行相对应的观察者
 ```
