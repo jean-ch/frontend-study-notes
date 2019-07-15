@@ -70,6 +70,40 @@ arr.reduce(callback(accumulator, currentValue, index), initialValue)
 - accumulator是滚动运算的前次运算的值， 或initialValue
 - reduce可以带initialValue
 
+##### reduce实现map
+```
+function reduceMpa(func, that) {
+	return function(list) {
+		if (typeof func != 'function') {
+			throw new TypeError(func + ' is not a function');
+		}
+
+		if (!Array.isArray(list)) {
+			throw new TypeError(list + ' is not an array');
+		}
+
+		if (list.length == 0) {
+			return [];
+		}
+
+		return list.reduce((acc, cur, index) => {
+			return acc.concat([func.call(that, cur, index, list)]);
+		}, []); 
+	}
+}
+```
+
+##### reduce实现filter
+```
+function reduceFilter(func, that) {
+	return function(list) {
+		return list.reduce((acc, cur, index) => {
+			return func.call(that, cur, index, list) ? acc.concar([value]) : acc；
+		}, []);
+	}
+}
+```
+
 #### sort, reverse
 - sort(function compare(a, b) {})    
 - reverse()
