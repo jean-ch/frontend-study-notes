@@ -49,3 +49,15 @@
   visibility:hidden;
 }
 ```
+
+##### .clearfix类
+```
+.clearfix:before,.clearfix:after {
+  display: table;
+  content: " "
+}
+
+.clearfix:after {
+  clear: both
+}
+```
