@@ -78,3 +78,18 @@ var Singleton = (function () {
 /*调用公有的方法来获取实例:*/
 Singleton.getInstance().publicMethod();
 ```
+
+#### es6
+```
+class Singleton {
+  constructor(name) {
+    this.name = name;
+  }
+
+  static getInstance(name) {
+    if (!this.instance) {
+      this.instance = new Singleton(name);
+    }
+  }
+}
+```
