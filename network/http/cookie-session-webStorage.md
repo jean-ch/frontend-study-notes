@@ -58,7 +58,8 @@ response.addCookie(cookie); // 输出到客户端
   - Session不支持跨域名访问
 
 #### webStorage- sessionStorage, localStorage 
-localStorage HTML5本地存储web storage特性的API之一，用于将大量数据（最大5M）保存在浏览器中，保存后数据永远存在不会失效过期，除非用 js手动清除。     
+localStorage HTML5本地存储web storage特性的API之一，用于将大量数据（最大5M）保存在浏览器中，保存后数据永远存在不会失效过期，除非用 js手动清除。    
+同域名共享一个localStorage 
 不参与网络传输。     
 一般用于性能优化，可以保存图片、js、css、html 模板、大量数据。  
 ```windows.sessionStorage```   
