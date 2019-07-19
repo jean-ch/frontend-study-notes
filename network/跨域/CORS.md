@@ -55,7 +55,7 @@ CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到以�
 
 ### 非简单请求   
 #### 预检请求 preflight
-- 在正式通信之前，增加一次HTTP查询请求
+- 在正式通信之前，增加一次HTTP **OPTIONS**请求
 - 用于询问服务器
   - 当前网页所在的域名是否在服务器的许可名单之中，
   - 可以使用哪些HTTP方法
