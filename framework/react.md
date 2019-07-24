@@ -5,5 +5,9 @@
 - 优化reflow
 - 用cancat代替push不会对原array产生mutation
 
+
+
+
+- setState
 ？ 单向绑定和双向绑定    
 ？ 怎么处理state

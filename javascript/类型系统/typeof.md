@@ -1,3 +1,12 @@
+typeof一共有八种返回值
+- number
+- boolean
+- string
+- undefined
+- object
+- function
+- symbol
+
 #### undefined   
 ```
 typeof undefined === 'undefined';
@@ -29,7 +38,7 @@ typeof (typeof 1) === 'string';
 #### object 
 ```
 typeof {a: 1} === 'object';
-typeof [1, 2, 3] === 'object'; // 用Array.isArray或Object.prototype.toString.call来判断是Array 
+typeof [1, 2, 3] === 'object'; // 用Array.isArray, instanceOf, Object.prototype.toString.call来判断是Array 
 typeof new Date() === 'object'; 
 typeof /regex/ === 'object'; 
 ``` 

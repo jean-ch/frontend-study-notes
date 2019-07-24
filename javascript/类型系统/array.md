@@ -1,4 +1,4 @@
-###  扩展运算符的应用场景
+####  扩展运算符的应用场景
 ```...arr```调用的数据结构中的iterator接口       
 - 数组平铺成函数参数   
 - 利用Math.max求数组最大值```Math.max(...arr)```  
@@ -20,6 +20,10 @@
 - 与解构赋值结合```const [first, ...rest] = [1, 2, 3, 4, 5];```
 - 遍历Map, Set, Generator  
 	```[...map.keys()];```
+
+#### 解构赋值  
+- 交换数组中的两个元素 
+````[arr[i], arr[j]] = [arr[j], arr[i]]```
 
 ### API
 #### 转换数组： Array.from(), 扩展运算符, Array.prototype.slice, Array.of()
@@ -118,3 +122,13 @@ function reduceFilter(func, that) {
 
 #### flat
 - flat(depth) 
+
+#### Interview Questions
+- 打乱数组
+```
+const arr = [0, 1, 2, 3, 4];
+for (let i = 1; i < arr.length; i++) {
+    const random = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[random]] = [arr[random], arr[i]];
+}
+```
