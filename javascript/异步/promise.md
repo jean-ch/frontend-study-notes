@@ -1,4 +1,8 @@
 Promise解决了多层callback传统写法下层叠套用的问题，通过维护状态(pending, resolved, rejected), 传递状态，利用promise提供的then, all等接口来实现链式调用   
+
+#### 创建promise
+- new Promise(promise1), return promise1
+- Promise.resolve(promise1), return promise1
    
 #### promise写法  
 - resolve方法的作用是把pending变成resolved，在异步操作成功时调用，并将异步操作的结果，作为参数传递出去        
@@ -256,3 +260,5 @@ mergePromise([ajax1, ajax2, ajax3]).then(data => {
     console.log(data); // data 为 [1, 2, 3]
 });
 ```
+
+[Promise 面试题](https://segmentfault.com/a/1190000016848192)

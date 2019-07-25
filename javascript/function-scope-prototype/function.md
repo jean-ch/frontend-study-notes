@@ -109,3 +109,17 @@ const Message = (text) => {
 var helloMessage = new Message('Hello World!');
 // Uncaught TypeError: Message is not a constructor
 ```
+
+###### 函数声明变量提升
+```
+<script>
+	var c = 1;
+	function c(c){
+			console.log(c);
+			var c = 3;
+	}
+	console.log(typeof(c)); // number
+	console.log(c); // 1 
+	c(2); // TypeError: c is not a function      
+</script>
+```
