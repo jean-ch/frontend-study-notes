@@ -34,4 +34,7 @@
 ##### 避免margin collapse   
 - 改变块级元素- 设成float, inline-block, position: absolute
 - BFC不和其子元素发生margin折叠  
-- 相邻元素设置成单独的BFC   
+- 相邻元素设置成单独的BFC  
+
+##### 百分比 
+margin和padding的百分比都是针对container的width来的

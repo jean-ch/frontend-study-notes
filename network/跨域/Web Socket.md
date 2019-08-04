@@ -10,6 +10,9 @@ HTML5新增的传输协议
 - 没有同源限制，客户端可以与任意服务器通信
 - 持久连接
 
+#### 跨域
+web socket协议没有同源策略，可以跨域
+
 #### API
 - new WebSocket('ws://localhost:8080')必须是绝对url
 - readyState

@@ -7,7 +7,7 @@ new Set(arr or interable data)
 - **NaN在set中视作相等**   
 - **指向同一个地址的对象在set中视作相等**  
 
-#### properties, functions   
+#### properties, api   
 - size  
 - add(), has(), delete(), clear()  
 - 数组的map,  filter可以间接用于set  
@@ -27,6 +27,9 @@ set = new Set([...set].map(val => val * 2));
 **和Object的区别： object只能用string做key**      
 **对同一个object的引用，map视作同一个key**    
 new Map(arr or set or interable data)  
+
+#### api
+- has(), get(), set()
 
 #### 遍历操作   
 ```for (let [key, value] of map)```  

@@ -4,7 +4,7 @@
 作用- 参数复用、提前返回和延迟执行
 
 #### 实现
-multi(2)(3)(4)
+multi(2)(3)(4)   
 ```
 function curry(fn) {
     let args = [];

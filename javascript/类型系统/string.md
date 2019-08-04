@@ -30,3 +30,5 @@ tag(['Hello ', ' world ', ''], 15, 50);
 - startsWith(), endsWith() 
 - repeat(n)   
 - trim(), trimStart(), trimEnd()  
+- charCodeAt() // A -> 65
+- fromCharCode() // 65 -> A

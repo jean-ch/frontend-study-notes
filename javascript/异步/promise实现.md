@@ -1,105 +1,209 @@
+- constructor
+    - constructor里主要维护_status和_value
+    - constructor里维护的_fulfilledQueue和_rejectedQueue是用来存放状态改变后需要执行的函数
+- _resolve, _reject
+    - _resolve和_reject方法需要支持同步的promise，所以用异步setTimeout包装了一下
+    - _resolve如果传入resolve的是promise的对象，要等这个promise对象状态改变后当前promise才能改变
+- then, catch
+    - then和catch都返回promise
+    - then的回调函数参数有以下三种情况
+        - 不是函数而是值，会发生值穿透
+        - 函数返回promise，则要等待这个promise状态变化
+        - 函数返回值，把值传递给链式调用的下个回调函数
+    - catch相当于onFulfilled为undefined的then方法
+- resolve, reject, all, race
+    - resolve的参数如果是promise，直接返回这个promise，否则包装一个promise，并把参数传给promise的resolve
+    - resolve, reject, all, race都是promise的static方法
+    - Promise.all和Promise.race接收的都是遍历器对象
+
 ```
-class Promise(executor) {
-  constructor(handle) {
-    if (typeof handle != 'function') {
-        throw new Error('promise only accept a function parameter');
-    }
+const PENDING = 'PENDING';
+const FULFILLED = 'FULFILLED';
+const REJECTED = 'REJECTED';
+const isFunction = variable => typeof variable === 'function';
+class Promise {
+	// handle: (resolve, reject) => {}
+	constructor(handle) {
+		if (!isFunction(handle)) {
+			throw new Error('Promise must accept a function as parameter');
+		}
 
-    this.status = 'pending';
-    this.value = undefined;
-    this.fulfilledQueue = [];
-    this.rejectedQueue = [];
-    try {
-        handle(this.resolve.bind(this), this.reject.bind(this));
-    } catch(e) {
-        this.reject(e);
-    }
-  }
+		this._status = PENDING;
+		this._value = undefined;
 
-  resolve(val) {
-    if (this.status != 'pending') {
-        return;
-    }
+		this._fulfilledQueue = [];
+		this._rejectedQueue = [];
 
-    const run = () => {
-        this.status = 'fulfilled';
-        this.value = val;
-        let job;
-        while (job = this.fulfilledQueue.shift()) {
-            job(this.value);
-        }
-    }
+		try {
+			handle(this._resolve.bind(this), this._reject.bind(this));
+		} catch (e) {
+			this._reject(e);
+		}
+	}
 
-    setTimeout(() => run(), 0); //为支持同步promise，这里采用异步调用
-  }
+	_resolve(val) {
+		const run = () => {
+			if (this._status !== PENDING) {
+				return;
+			}
 
-  reject(val) {
-    if (this.status != 'pending') {
-        return;
-    }
+			const runFulfilled = (val) => {
+				let job;
+				while (job = this._fulfilledQueue.shift()) {
+					job(val);
+				}
+			}
 
-    const run = () => {
-        this.status = 'rejected';
-        this.value = val;
-        let job;
-        while (job = this.fulfilledQueue.shift()) {
-            job(this.value);
-        }
-    }
+			const runRejected = (err) => {
+				let job;
+				while (job = this._rejectedQueue.shift()) {
+					job(val);
+				}
+			}
 
-    setTimeout(() => run(), 0); //为支持同步promise，这里采用异步调用
-  }
+			// 如果传入resolve的是promise对象，要等待这个promise对象状态改变
+			if (val instanceof Promise) {
+				val.then(value => {
+					this._value = value;
+					this._status = FULFILLED;
+					runFulfilled(value);
+				}, error => {
+					this._value = error;
+					this._status = REJECTED;
+					runRejected(error);
+				})
+			} else {
+				this._value = val;
+				this._status = FULFILLED;
+				runFulfilled(val);
+			}
+		}
 
-  then(onFulfiled, onRejected) {
-    return new Promise((onFulfilledNext, onRejectedNext) => { //满足链式调用
-        let fulfilled = (this.value) => {
-            try{
-                if (typeof onFulfiled != 'function') {
-                    onFulfilledNext(this.value); //值穿透
-                } else {
-                    let res = onFulfiled(this.value);
-                    if (res instanceof Promise) {
-                        res.then(onFulfilledNext, onRejectedNext); //返回的是promise，等待状态改变后执行下一个then的回调
-                    } else {
-                        onFulfilledNext(res);//否则将返回结果作为参数传给下个then的回调
-                    }
-                }
-            } catch(e) {
-                onRejectedNext(e);
-            }
-        }
+		// 为支持同步promise，这里采用异步调用
+		setTimeout(run, 0);
+	}
 
-        let rejected = (err) => {
-            try {
-                if (typeof onRejected != 'function') {
-                    onRejectedNext(err);
-                } else {
-                    let res = onRejected(err);
-                    if (res instanceof Promise) {
-                        res.then(onFulfilledNext, onRejectedNext);
-                    } else {
-                        onFulfilledNext(res);
-                    }
-                }
-            } catch(e) {
-                onRejectedNext(e);
-            }
-        }
-    }
+	_reject(e) {
+		if (this._status !== PENDING) {
+			return;
+		}
 
-    switch(this.status) {
-        case 'pending': 
-            this.fulfilledQueue.push(onFulfiled);
-            this.rejectedQueue.push(onRejected);
-            break;
-        case 'fulfilled':
-            onFulfiled(this.value);
-            break;
-        case 'rejected':
-            onRejected(this.value);
-            break;
-    }
-  }
+		const run = () => {
+			this._status = REJECTED;
+			this._value = e;
+			let job;
+			while (job = this._rejectedQueue.shift()) {
+				job(e);
+			}
+		}
+
+		setTimeout(run, 0);
+	}
+
+	then(onFulfilled, onRejected) {
+		const {_value, _status} = this;
+
+		return new Promise((onFulfilledNext, onRejectedNext) => {
+			let fulfilled = value => {
+				try {
+					// 值穿透
+					if (!isFunction(onFulfilled)) {
+						onFulfulledNext(value);
+					} else {
+						let res = onFulfulled(value);
+						// 如果返回的是promise对象，需要等待promise状态改变后再执行下一个回调
+						if (res instanceof Promise) {
+							res.then(onFulfilledNext, onRejectedNext);
+						} else {
+							onFulfilledNext(res);
+						}
+					}
+				} catch(e) {
+					onRejectedNext(e);
+				}
+			}
+
+			let rejected = error => {
+				try {
+					if (!isFunction(onRejected)) {
+						onRejectedNext(error);
+					} else {
+						let res = onRejected(error);
+						if (res instanceof Promise) {
+							res.then(onFulfilledNext, onRejectedNext);
+						} else {
+							onRejectedNext(res);
+						}
+					}
+				} catch(e) {
+					onRejectedNext(e);
+				}
+			}
+
+			switch (_status) {
+				case PENDING:
+					this._fulfilledQueue.push(fulfilled);
+					this._rejectedQueue.push(rejected);
+					break;
+				case FULFILLED:
+					fulfilled(_value);
+					break;
+				case REJECTED:
+					rejected(_value);
+					break;
+			}
+		});
+	}
+
+	catch(onRejected) {
+		return this.then(undefined, onRejected);
+	}
+
+	static resolve(value) {
+		if (value instanceof Promise) {
+			return value;
+		} else {
+			return new Promise(resolve => resolve(value));
+		}
+	}
+
+	static reject(value) {
+		return new Promise((resolve, reject) => reject(value));
+	}
+
+	static all(promises) {
+		return new Promise((resolve, reject) => {
+			// 先把iterable对象转成数组
+			promises = Array.from(promises);
+			if (promises.length === 0) {
+				return resolve([]);
+			}
+			let values = [];
+			let count = 0;
+			for (let [index, promise] of list.entries()) {
+				this.resolve(promise).then(res => {
+					values[index] = res;
+					if (++index === promises.length) {
+						resolve(values);
+					}
+				})
+			}
+		}, err => {
+			reject(err);
+		})
+	}
+
+	static race(promises) {
+		return new Promise((resolve, reject) => {
+			for (let promise of promises) {
+				this.resolve(promise).then(res => {
+					resolve(res);
+				}, error => {
+					reject(error);
+				})
+			}
+		});
+	}
 }
 ```
 

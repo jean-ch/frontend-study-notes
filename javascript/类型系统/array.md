@@ -76,7 +76,7 @@ arr.reduce(callback(accumulator, currentValue, index), initialValue)
 
 ##### reduce实现map
 ```
-function reduceMpa(func, that) {
+function reduceMap(func, that) {
 	return function(list) {
 		if (typeof func != 'function') {
 			throw new TypeError(func + ' is not a function');
@@ -102,8 +102,23 @@ function reduceMpa(func, that) {
 function reduceFilter(func, that) {
 	return function(list) {
 		return list.reduce((acc, cur, index) => {
-			return func.call(that, cur, index, list) ? acc.concar([value]) : acc；
+			return func.call(that, cur, index, list) ? acc.concat([value]) : acc；
 		}, []);
+	}
+}
+```
+
+##### map实现reduce
+```
+function mapReduce(func, that) {
+	return function(list, init) {
+		let acc = init;
+		list = list.map((cur, index, list) => {
+			acc = func.call(that, init, cur, index, list);
+			return acc;
+		});
+
+		return list[list.length - 1];
 	}
 }
 ```

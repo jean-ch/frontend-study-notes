@@ -2,7 +2,7 @@ defer和async都是script标签的属性
 开启新线程，延迟执行，不阻塞当前文档的解析  
 
 #### defer
-异步下载脚本，但下载完成后不立即执行脚本，而是在load之后DOMContentLoaded之前执行    
+异步下载脚本，但下载完成后不立即执行脚本，而是在DOMContentLoaded之后load之前执行    
 - 只适用外联脚本，没有src属性的script不要用defer  
 - 多个defer的script会按顺序执行
 - defer在DOMContentLoaded和Load之间执行
