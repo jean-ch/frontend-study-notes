@@ -77,49 +77,43 @@ arr.reduce(callback(accumulator, currentValue, index), initialValue)
 ##### reduce实现map
 ```
 function reduceMap(func, that) {
-	return function(list) {
-		if (typeof func != 'function') {
-			throw new TypeError(func + ' is not a function');
-		}
-
-		if (!Array.isArray(list)) {
-			throw new TypeError(list + ' is not an array');
-		}
-
-		if (list.length == 0) {
-			return [];
-		}
-
-		return list.reduce((acc, cur, index) => {
-			return acc.concat([func.call(that, cur, index, list)]);
-		}, []); 
+	if (typeof func != 'function') {
+		throw new TypeError(func + ' is not a function');
 	}
+
+	if (!Array.isArray(this)) {
+		throw new TypeError(this + ' is not an array');
+	}
+
+	if (this.length == 0) {
+		return [];
+	}
+
+	return this.reduce((acc, cur, index, arr) => {
+		return acc.concat([func.call(that, cur, index, arr)]);
+	}, []); 
 }
 ```
 
 ##### reduce实现filter
 ```
-function reduceFilter(func, that) {
-	return function(list) {
-		return list.reduce((acc, cur, index) => {
-			return func.call(that, cur, index, list) ? acc.concat([value]) : acc；
-		}, []);
-	}
+Array.prototype.filter = function(func, that) {
+	return this.reduce((acc, cur, index, arr) => {
+		return func.call(that, cur, index, arr) ? acc.concat([cur]) : acc；
+	}, []);
 }
 ```
 
 ##### map实现reduce
 ```
-function mapReduce(func, that) {
-	return function(list, init) {
-		let acc = init;
-		list = list.map((cur, index, list) => {
-			acc = func.call(that, init, cur, index, list);
-			return acc;
-		});
-
-		return list[list.length - 1];
-	}
+Array.prototype.reduce = function(func, init) {
+	let list = [init];
+	let acc = init;
+	this.map((cur, index, arr) => {
+		acc = func(acc, cur, index, arr);
+		list.push(acc);
+	});
+	return list[list.length - 1];
 }
 ```
 

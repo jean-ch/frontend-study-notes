@@ -42,6 +42,5 @@ function(nums, start, mid, end, tmp) {
   for (let i = start; i <= end; i++) {
     nums[i] = temp[index];
   }
-
 }
 ```

@@ -128,7 +128,7 @@ Function.prototype.bind(context) {
 
     context = context ? Object(context) : window;
     let bindArgs = [...arguments].slice(1);
-    function() fBind{
+    function fBind(){
         let args = [...arguments].concat(bindArgs);
         return self.apply((this instanceof self ? this : context), args);
     }

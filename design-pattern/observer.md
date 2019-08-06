@@ -1,23 +1,27 @@
+- publisher维护一个subscriber callback function列表
+- subscribe：往publisher的subscriber列表中添加一个callback
+- unsubscribe：从publisher的subscriber列表中删除这个callback
+- publish：调用subscriber列表中的每个callback
+
 ```
 Publisher.prototype.publish = function(news) {
     var publisher = this;
-    this.subscribers.forEach(subscribe => subscribe(news, publisher));
+    this.subscribers.forEach(subscriber => subscriber(news, publisher));
     return this;
 }
 
-Function.prototype.subscribe = function(publish) {
+Function.prototype.subscribe = function(publisher) {
     var subscriber = this;
-    var exist = publish.subscribers.some(item => item === subscriber);
-    if (!exist) {
-        publish.subscribers.push(subscriber);
+    if (!publisher.subscribers.includes(item)) {
+        publisher.subscribers.push(subscriber);
     }
 
     return this;
 }
 
-Function.prototype.unsubscribe = function(publish) {
+Function.prototype.unsubscribe = function(publiser) {
     var subscriber = this;
-    publish.subscribers.filter(item => item !== subscriber);
+    publisher.subscribers.filter(item => item !== subscriber);
     return this;
 }
 

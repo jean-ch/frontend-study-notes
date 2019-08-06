@@ -1,4 +1,7 @@
 #### 方法  
+- 精度：number是用64位比特表示的，相当于标准的double双精度浮点数
+	- 12和12.0是一个数
+	- 0.1 + 0.2 = 0.30000000000000004
 - Number.isFinite(**Infinity**)  
 - Number.isNaN()  
 	- NaN !== NaN

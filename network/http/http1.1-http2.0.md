@@ -18,7 +18,7 @@
 响应头中Transfer-Encoding: chunked指明分块传输
 注意：分块传输时无法给出确切长度，应缺省Content-Length
 
-##### 范围请求
+##### 范围请求- 断点续传
 响应头中Accept-Ranges: bytes 告知浏览器服务器支持范围请求        
 请求头中Range: bytes=x-y 请求x-y偏移量范围内的数据     
 响应头中Content-Range：bytes x-y/length 返回内容的偏移量和长度。   

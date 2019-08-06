@@ -39,9 +39,9 @@ function partition(nums, left, right) {
       left++;
       right--;
     }
-
-    return left; //left是pivot的index + 1
   }
+
+  return left; //left是pivot的index + 1
 }
 
 function quicksort(nums) {
