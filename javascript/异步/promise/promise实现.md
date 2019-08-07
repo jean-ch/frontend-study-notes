@@ -181,6 +181,7 @@ class Promise {
 			let values = [];
 			let count = 0;
 			for (let [index, promise] of list.entries()) {
+				// 考虑到 promise 可能是 thenable 对象也可能是普通值
 				this.resolve(promise).then(res => {
 					values[index] = res;
 					if (++index === promises.length) {

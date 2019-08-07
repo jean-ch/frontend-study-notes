@@ -10,38 +10,38 @@ function partition(nums, left, right) {
 
     nums[left] = nums[right];
     while (left < right && nums[left] <= pivot) {
-      left--;
+      left++;
     }
 
     nums[right] = nums[left];
   }
 
   nums[left] = pivot;
-  return left; // left就是pivor的index
+  return left; // left就是pivot的index
 }
 ```
 #### Quick sort
 ```
-function partition(nums, left, right) {
-  let pivot = nums[(left + right) / 2];
+function partition(arr, start, end) {
+  let pivot = arr[end];
+  let i = start;
+  let j = end;
+	while (i < j) {
+		while (i < j && arr[i] <= pivot) {
+			i++;
+		}
 
-  while (left <= right) {
-    while (left <= right && nums[left] < pivot) {
-      left++;
-    }
+		while (i < j && arr[j] >= pivot) {
+			j--;
+		}
 
-    while (left <= right && nums[right] > pivot) {
-      right++;
-    }
-
-    if (left <= right) {
-      swap(nums, left, right);
-      left++;
-      right--;
-    }
-  }
-
-  return left; //left是pivot的index + 1
+		if (i < j) {
+			[arr[i], arr[j]] = [arr[j], arr[i]];
+		}
+	}
+    
+  [arr[end], arr[i]] = [arr[i], arr[end]];
+	return i;  // i是pivot的index
 }
 
 function quicksort(nums) {
