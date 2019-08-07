@@ -17,6 +17,7 @@
 - 前端执行服务端返回的方法调用。
 ```
 function jsonp({url, params, callback}) {
+    // 调用异步callback函数，用promise包
     return new Promise((resolve, reject) => {
         // 创建 script 标签
         let script = document.createElement('script');

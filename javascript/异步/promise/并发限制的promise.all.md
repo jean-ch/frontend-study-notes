@@ -12,12 +12,12 @@ function asyncPool(limit, array, fn) {
         let p = Promise.resolve().then(fn.bind(this, item, array));
         promises.push(p);
 
-        let e = () => executing.splice(executing.indexOf(e), 1);
+        let e = p.then(() => executing.splice(executing.indexOf(e), 1));
         executing.push(e);
 
         let sequence = Promise.resolve();
         if (executing.length >= limit) {
-            sequence = Promise.race(p);
+            sequence = Promise.race(promises);
         }
 
         sequence.then(enqueue);

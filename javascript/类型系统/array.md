@@ -107,13 +107,18 @@ Array.prototype.filter = function(func, that) {
 ##### map实现reduce
 ```
 Array.prototype.reduce = function(func, init) {
-	let list = [init];
-	let acc = init;
-	this.map((cur, index, arr) => {
+	if (this.length === 0) {
+		throw new Error();
+	}
+
+	let acc = init ? init : this[0];
+	let array = init ? this : this.slice(1);
+	let list = this.map((cur, index, arr) => {
 		acc = func(acc, cur, index, arr);
-		list.push(acc);
+		return acc;
 	});
-	return list[list.length - 1];
+
+	return list;
 }
 ```
 

@@ -15,13 +15,13 @@ function spawn(genF) {
 			}
 
 			Promise.resolve(next.value).then((value) => {
-				step(() => gen.next(value));
+				step(gen.next.bind(this, value));
 			}, (error) => {
-				step(() => gen.throw(error));
+				step(gen.throw.bind(this, error));
 			})
 		}
 
-		step(() => gen.next(undefined));
+		step(gen.next.bind(this, undefined));
 	})
 }
 

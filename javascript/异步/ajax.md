@@ -45,7 +45,7 @@ request.open("GET, url, true);
 ``` 
 ##### set request header，在open之后send之前
 ```
-request.senRequestHeader("Content-type", "application/x-www-form-urlencoded");
+request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 ```
 ##### send xhr
 ```

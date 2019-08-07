@@ -40,4 +40,4 @@ window.onload=function(){
 
 ##### addEventListener和onclick的区别
 - onclick只能给一个对象添加监听，addEventListener可以同时给多个对象添加监听
-- addEventListener可以指明是冒泡还是捕获
+- addEventListener可以指明是冒泡还是捕获, 第三个参数true-冒泡，false-捕获

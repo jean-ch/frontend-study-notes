@@ -24,7 +24,7 @@ function(nums, start, mid, end, tmp) {
   let right = mid;
   let index = start;
   while (left <= mid && right <= end) {
-    if (nums[left] < nums[right]>) {
+    if (nums[left] < nums[right]) {
         temp[index++] = nums[left++];
     } else {
       temp[index++] = nums[right++];

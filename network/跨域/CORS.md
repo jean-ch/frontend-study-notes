@@ -115,7 +115,7 @@ xhr.send();
 #### XDR- XDomainRequest
 - 没有cookie
 - 只能设置content-type
-- 支支持Get， Post
+- 只支持Get， Post
 - 不能访问response header
 - open()只接受method和url，只支持异步请求
 
