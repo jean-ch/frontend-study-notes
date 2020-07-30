@@ -15,7 +15,7 @@ function partition(nums, start, end, temp) {
   merge(nums, start, mid, end, temp);
 }
 
-function(nums, start, mid, end, tmp) {
+function merge(nums, start, mid, end, tmp) {
   if (start >= mid || mid >= end) {
     return;
   }

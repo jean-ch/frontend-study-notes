@@ -3,7 +3,7 @@ typeof一共有八种返回值
 - boolean
 - string
 - undefined
-- object
+- object（对象， null）
 - function
 - symbol
 

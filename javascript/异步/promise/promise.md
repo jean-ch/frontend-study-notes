@@ -29,7 +29,7 @@ new Promise(function(resolve, reject) {
 }).catch(function (reason) {
 	log('Failed: ' + reason);	
 })
-```  
+```
 
 #### 串行执行一系列promise  
 - 能够实现链式写法的原因是在then和catch都返回一个新的Promise实例对象        

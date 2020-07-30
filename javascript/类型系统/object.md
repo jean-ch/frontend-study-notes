@@ -1,15 +1,15 @@
-#### API
-##### Object.is(obj1, obj2)
-可以准确判断NaN
+### API
+#### Object.is(obj1, obj2)
+可以准确判断NaN ```Object.is(NaN, NaN);```
 
-##### Object.assign(target, source1, source2...)
+#### Object.assign(target, source1, source2...)
 将source对象的所有可枚举属性赋给target
 - 浅拷贝
 - 只拷贝对象的实例属性，**不拷贝继承属性和不可枚举属性**  
 - 不是对象会先转成对象   
 - undefined和null无法转成对象，作为首参数会报错，否则会跳过  
 - 同名属性后面的source替换前面的source
-- source如果是数组，视作对象处理，属性名是index相等
+- source如果是数组，视作对象处理，属性名是对应的 index
     ```
 	Object.assign([1, 2, 3], [4, 5])
 	// [4, 5, 3] 4作为属性名为1的对象覆盖了前面的1
@@ -28,7 +28,7 @@
     Object.getOwnPropertyDescriptor(target2, 'foo')
     ```
 
-##### 遍历对象的属性  
+#### 遍历对象的属性  
 - for...in...  
 	循环遍历对象自身的和**继承**的**可枚举**属性， 不包括Symbol属性     
 - Object.keys(obj)  
@@ -40,19 +40,19 @@
 - Reflect.ownKeys(obj)   
 	返回数组包含**所有**键名，包括Symbol和不可枚举属性    
 
-##### 对象的原型链继承方法  
+#### 对象的原型链继承方法  
 - Object.setPrototypeOf(obj, prototype)   
     - ```var o = new Obj() ==> Object.setPrototypeOf(o, Obj.prototype)```
     - 不再使用__proto
 - Object.getPrototypeOf(obj)
 
-##### 对象的属性方法
+#### 对象的属性方法
 - Object.defineProperty(obj, name, value)
 - Object.defineProperties(obj, {name: value})
 - Object.getOwnPropertyDescriptor(obj, name)
 - Object.getOwnPropertyDescriptors()可以拿到所有自身（非继承）属性，包括get，set
 
-##### 对象的扩展运算符 
+#### 对象的扩展运算符 
 - 用于数组  
 	```foo = { ...['a', 'b', 'c'] };// {0: "a", 1: "b", 2: "c"}```  
 - 用于非对象  
@@ -71,7 +71,7 @@
 	```
 - 扩展运算符后面可以跟表达式
 
-##### 解构赋值  
+#### 解构赋值  
 扩展运算符的解构赋值不能用于复制继承自原型对象的属性 
 ```
 const o = Object.create({ x: 1, y: 2 }); //{a: 1, y: 2}是o的prototype
@@ -83,7 +83,7 @@ y // undefined
 z // 3
 ```   
 
-##### Iterator接口 
+#### Iterator接口 
 供for..of循环使用     
 - Object.keys()    
 	- 数组的key是数组数字对应的string  
@@ -115,13 +115,13 @@ z // 3
 	Object.fromEntries(map)
 	```     
 
-#### 对象的super关键字   
+### 对象的super关键字   
 - this指向方法所在的object  
 - super指向object的原型  
 	- super只能用在对象的方法中，不能用在对象的属性，或对象方法里面的函数中   
 
-#### 创建对象的方法
-##### 工厂模式
+### 创建对象的方法
+#### 工厂模式
 ```
 function createPerson(name, age, job) {
     var o = new Object();
@@ -139,7 +139,7 @@ var person = createPerson('Greg', 27, 'Doctor');
 ```
 无法知道一个对象的类型 
  
-##### 构造函数模式 
+#### 构造函数模式 
 ```
 function Person(name, age, job) {
     this.name = name;
@@ -154,7 +154,7 @@ var person = new Person('Greg', 27, 'Doctor');
 ```
 - 缺陷：每个person实例都包含一个不同的sayName Function实例
 
-##### 原型模式
+#### 原型模式
 ```
 function Person() {}
 Person.prototype.name = 'Greg';
@@ -169,7 +169,7 @@ var person = new Person();
 - 解决：方法放在原型上被所有实例共享  
 - 缺陷：引用类型被所有实例共享
 
-##### 组合使用构造函数和原型模式  
+#### 组合使用构造函数和原型模式  
 - 构造函数中放特有属性和引用类型的属性 
 - 原型上放方法避免生成重复的方法实例
 ```

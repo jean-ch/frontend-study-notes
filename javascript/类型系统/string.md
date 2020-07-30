@@ -1,3 +1,7 @@
+#### String 和 toString 的差别
+String() 可以用来转换 null 和 undefined  
+toString(base) 可以基于 base 转数字的进制字符串
+
 #### 遍历 
 ```for (let c of s)```  
 

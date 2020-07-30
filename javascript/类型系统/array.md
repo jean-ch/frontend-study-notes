@@ -1,5 +1,5 @@
 ####  扩展运算符的应用场景
-```...arr```调用的数据结构中的iterator接口       
+```...arr```调用的数据结构中的 iterator 接口       
 - 数组平铺成函数参数   
 - 利用Math.max求数组最大值```Math.max(...arr)```  
 - 合并数组(浅拷贝) 
@@ -26,6 +26,22 @@
 ````[arr[i], arr[j]] = [arr[j], arr[i]]```
 
 ### API
+#### 构造数组
+
+```
+var arr = ['a', 'b'];
+var arr = Array('a', 'b');
+var arr = new Array('a', 'b');
+``` 
+
+#### length
+length 不是只读的
+```
+var arr = [1, 2, 3];
+arr.length = 2;
+alert(arr[2]) // undefined
+```
+
 #### 转换数组： Array.from(), 扩展运算符, Array.prototype.slice, Array.of()
 - Array.from(array-like, mapFunc)
 	- array-like: 
@@ -43,6 +59,10 @@
 	```Array.of(1, 2, 3); // [1, 2, 3] ```  
 	- **用于弥补Array()构造数组的不足- 因为参数个数不同导致Array()行为有差异, 参数个数只有一个代表指定 数组的长度**  
 	```Array(3); //[ , , ,]```  
+- valueOf()   
+	```[1, 2].valueOf() // [1, 2]```
+- toString()  
+	```[1, 2].toString() // "1, 2"```
 
 #### 检测数组 
 - arr instanceof Array
@@ -52,7 +72,7 @@
 
 #### concat, slice, splice
 - slice return数组的浅拷贝
-- splice 改变原数组，return包含所有被删除元素的array. ssplice(startIndex, count, item1, item2..)
+- splice 改变原数组，return包含所有被删除元素的array. splice(startIndex, count, item1, item2..)
 
 #### push, pop, shift, unshift
 - push, pop 向数组的尾端插入/删除
@@ -61,7 +81,7 @@
 - pop, shift return删除的元素 
 
 #### find, includes, indexOf
-- includes采用严格等号===进行比对，因此对NaN判断有误
+- includes采用严格等号===进行比对，因此对NaN判断有误. includes(val, fromIndex)， 参数不是 callback func
 - indexOf改进了includes，对NaN判断正确
 - find(callback(element, index, arr))
 
@@ -72,7 +92,7 @@
 #### reduce
 arr.reduce(callback(accumulator, currentValue, index), initialValue)
 - accumulator是滚动运算的前次运算的值， 或initialValue
-- reduce可以带initialValue
+- reduce可以带initialValue, return value to find / undefined
 
 ##### reduce实现map
 ```
