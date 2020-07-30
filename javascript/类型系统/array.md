@@ -82,7 +82,7 @@ alert(arr[2]) // undefined
 
 #### find, includes, indexOf
 - includes采用严格等号===进行比对，因此对NaN判断有误. includes(val, fromIndex)， 参数不是 callback func
-- indexOf改进了includes，对NaN判断正确
+- indexOf改进了includes，对NaN判断正确, indexOf(val, fromIndex)
 - find(callback(element, index, arr))
 
 #### filter, map, every, some
