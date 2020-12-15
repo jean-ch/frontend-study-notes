@@ -5,12 +5,13 @@
 - 难以判断请求是否失败，只能依靠script元素的onerror
 
 #### JSONP
-通过动态创建script，再请求一个带参网址实现跨域通信
-- 回调函数：在请求中指定
-- 数据 （数据用JSON相似的格式传给回调函数）
-- 动态script元素的src属性指定跨域url
+- 简单来说是 script 可以实现跨域
+- 那么我们在请求页面的 script 标签里面指定一个 callback function，它的参数是我们想要请求得到的数据
+- 继而我们在页面上动态挂在一个 script，指定跨域的 url，并在 url 的参数里面指定我们要请求的 query params，和我们上面 script 里面已经写好的这个 callback function 的名字
+- 于是我们就能实现 script 跨域，在请求的服务器里 query 到我们想要的数据，并且传给 callback function，我们就能够拿到 callback 之后的结果
+- 为什么叫 JSONP 呢，因为我们在跨域服务器里 query 到的数据是类 JSON 格式的
 
-##### 实现
+##### 实现 example
 - 创建 callback 方法。
 - 插入 script 标签。
 - 后台接受到请求，解析前端传过去的 callback 方法，返回该方法的调用，并且数据作为参数传入该方法。
@@ -61,3 +62,5 @@ jsonp({
 ```
 #### 应用场景
 通常为了减轻web服务器的负载，我们把js、css，img等静态资源分离到另一台独立域名的服务器上，在html页面中再通过相应的标签从不同域名下加载静态资源，而被浏览器允许
+
+[详细解释瞅这里](https://blog.csdn.net/hansexploration/article/details/80314948)
